@@ -1,0 +1,308 @@
+%告知 CTeX 这个文件是用 UTF-8 编码
+% !Mode:: "TeX:UTF-8"
+
+%使用 pdflatex
+%!TEX program = pdflatex
+
+
+\documentclass[12pt,a4paper]{article}
+%正文字体大小为12pt, 页面规格是A4, 使用article文档格式
+\usepackage[utf8]{inputenc}
+%作用是inputenc用来识别输入编码
+
+
+\usepackage[left=2.2cm,right=2.2cm,top=3cm,bottom=2.5cm]{geometry}
+%latex设置页面边距，页面大小，页边距
+\usepackage{mathtools}
+%数学公式扩展宏包，提供了公式编号定制和更多的符号、矩阵等
+\usepackage{booktabs}  
+%booktabs宏包画三线表，线条精细可变
+\usepackage{graphicx} 
+%支持插图
+\usepackage{listings}
+%提供了排版关键字高亮的代码环境 lslisting 以及对版式的自定义。
+%类似宏包有minted
+\usepackage{amssymb}
+%打出因为所以那三个点的宏包， 导言区宏包
+
+\lstset{%使用\lstset{}进行代码环境的设置
+	backgroundcolor=\color{cyan!10},%% 选择代码背景，必须加上\ usepackage {color}或\ usepackage {xcolor}.
+	basicstyle=\ttfamily, % 设置代码字号.
+	numbers=left,% 给代码添加行号，可取值none, left, right.
+	numberstyle=\scriptsize %小六号 \scriptsize
+	% numberstyle=\tiny\color{mygray}, % 行号的字号和颜色
+}
+
+\usepackage{fancyhdr}
+%修改页眉页脚格式，令页眉页脚可以左对齐、居中、右对齐
+
+\usepackage{tikz}%以 TikZ 为基础提供排版样式丰富的彩色盒子的功能
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+%欧式电阻，美式电感
+
+\usepackage{indentfirst} %令章节标题后的第一段首行缩进
+\usepackage[wby]{callouts}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{white},  %背景颜色 
+	commentstyle=\color{codegreen}, %注释风格
+	keywordstyle=\color{magenta},   %关键字风格 红紫色
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize\ttfamily,breaklines=true,
+	%设置代码的大小  选择一种等宽（“打字机”）字体族  对过长的代码自动换行  
+	breakatwhitespace=false, %空格中断
+	xleftmargin=20pt, %x左边框
+	xrightmargin=20pt,%x右边框       
+	breaklines=true,  %代码过长则换行               
+	captionpos=b,     % 设置标题位置.               
+	keepspaces=true,  % 保留空格    有助于保持代码的缩进 possibly needs columns=flexible           
+	numbers=left,     % 给代码添加行号，可取值none, left, right.                   
+	numbersep=5pt,    % 设置行号与代码之间的间隔              
+	showspaces=false, % 显示每个地方添加特定下划线的空格; 覆盖了'showtringspaces'               
+	showstringspaces=false, % 仅在字符串中允许空格
+	showtabs=false,   % 在字符串中显示添加特定下划线的制表符               
+	tabsize=2,        % 将默认tab设置为2个空格  
+	framextopmargin=50pt,%代码区定框
+	frame=bottomline,   %代码区底部
+	basicstyle=\footnotesize\ttfamily,  % 设置代码字号
+	language=Octave     % 使用的语言
+}
+\usepackage{ulem}%提供排版可断行下划线的命令 \uline 以及其它装饰文字的命令
+\lstset{style=mystyle} %代码环境设置  自定义版式，将mystyle中版式导入
+\linespread{1.5}       %行距1.5倍 
+\title{\textbf{\texttt{Electric Circuits - Homework 05}}}
+\author{Automation Class 1904}
+\pagestyle{fancy}   %使用fancy风格
+\fancyhf{} % 清空当前设置
+\rhead{HW3 Edition} %页眉右边
+\rfoot{fireowl}       %页脚右边
+\lhead{Electric Circuits} % 页眉左边
+\cfoot{\thepage}    %页脚中间 页码
+\thispagestyle{plain}
+% empty
+% 无页眉页脚
+% plain
+% 无页眉，页脚为居中页码
+% headings
+% 页眉为章节标题，无页脚
+% myheadings
+% 页眉内容可自定义，无页脚
+\date{(Due date: 2020/1/3)}%自定义日期\today显示电脑上的日期-英文版
+
+\begin{document}
+	\maketitle
+	
+	\begin{enumerate}	
+		\item (10 Point)
+			Ans:
+		\begin{quote}
+			a).By the question:
+			\begin{center}
+				$f=400Hz$
+			\end{center}
+			b).From this question we know:
+			\begin{center}
+				$\theta_v = 0^{\circ}$\\
+				$I=\frac{V}{j\omega L} = \frac{100}{\omega L}\angle-90^{\circ}$
+			\end{center}
+			Thus:
+			\begin{center}
+				$\theta_i = -90^{\circ}$
+			\end{center}
+			c).By the question b and condition:
+			\begin{center}
+				$I_m=\frac{100}{\omega L} = 20$
+			\end{center}
+			Thus:
+			\begin{center}
+				$\omega L = 5\Omega$
+			\end{center}
+			d).Because:
+			\begin{center}
+				$\omega = 2\pi f=800\pi$
+			\end{center}
+			Then:
+			\begin{center}
+				$L = \frac{5}{800\pi}=1.99mH$
+			\end{center}
+			e).
+			\begin{center}
+				$Z_L=j\omega L=j5\Omega$
+			\end{center}
+		\end{quote}
+		\clearpage %另起一页
+		
+		\item (10 Points)Ans:
+		\begin{quote}
+			By the question use Node-voltage Method:
+			\begin{center}
+				$\frac{v_1-v_g}{20}+\frac{v_1}{j2}+\frac{v_1-v_2}{Z} = 0$\\
+				$\frac{v_2-v_1}{Z}+\frac{v_2}{-j10}+\frac{v_2-v_g}{3+j1}-I_g=0$
+			\end{center}
+			Thus 
+			\begin{center}
+				$v_2=209-j63 V$
+			\end{center}
+			Use $v_2$ to equotion 1:
+			\begin{center}
+				$Z=-0.9+j6.37$
+			\end{center}
+		\end{quote}
+		\clearpage
+		
+		\item (20 Points)Ans:
+		\begin{quote}
+		Step 1: Voltage source to Current source:
+		\begin{center}
+			$I_1 = \frac{240\angle 0^\circ}{j60-j36} = 10\angle -90^\circ A$
+		\end{center}
+		Step2: Calculate impedance Z
+		\begin{center}
+			$Z=j24||24=12+j12$
+		\end{center}
+		Step3: Current source to Voltage source
+		\begin{center}
+			$V_2=I_1Z=120-j120=120\sqrt{2}\angle -45^\circ V$
+		\end{center}
+		\end{quote}
+		\clearpage
+		
+		\item (10 Points)
+		\begin{quote}
+			Ans:\\
+			By the question use Node-Voltage Method:
+			\begin{center}
+				$\frac{v_0}{-j8}+\frac{v_0-2.4I_\Delta}{j4}+\frac{v_0}{5}-(10+j20)=0$\\
+				$I_\Delta = \frac{v_0}{-j8}$
+			\end{center}
+			Simplify it:
+			\begin{center}
+				$I_\Delta-2I_\Delta+j0.6I_\Delta-j1.6I_\Delta=10+j20$\\
+				$I_\Delta=-15-j5$
+			\end{center}
+			Thus:
+			\begin{center}
+				$v_0=-40+j120$
+			\end{center}
+		\end{quote}
+		
+		\clearpage
+		\item (10 Points)
+		\begin{quote}
+			Ans:\\
+			By the question:
+			\begin{center}
+				$Z_{Th}=45+j125+(\frac{\omega M}{|Z_{22}|})^2\bar Z_{22}=77+j109$
+			\end{center}
+			Then:
+			\begin{center}
+				$V_{Th} = \frac{425}{10+j5}\times j20=340+j680$
+			\end{center}
+		\end{quote}
+		\clearpage
+		
+		\item (10 Points)
+		\begin{quote}
+			Ans:\\
+			By the question:
+			\begin{center}
+				$i_g=4cos2000t \quad mA = 4\angle0^\circ mA$
+			\end{center}
+			Then:
+			\begin{center}
+				$Z_c=\frac{1}{j\omega c}=-j3125\Omega$\\
+				$Z_L=j\omega L=-j200\Omega$\\
+				$Z_{eq}=500+[-j3125||(j200+1000)]=\frac{23269500}{15289}-j\frac{2075000}{15289}$
+			\end{center}
+		 Thus:
+		\begin{center}
+			$P_g=-\frac{1}{2}|I|^2Re{Z_{eq}}=-12mW$
+		\end{center}
+		The source delivers 12mW of power to the circuit.
+		\end{quote}
+	
+		\clearpage
+		\item (10 Points)
+		\begin{quote}
+			Ans:\\
+			a).By the question:
+			\begin{center}
+				$S_1=16+j28  \quad KVA$\\
+				$S_2=6-j8  \quad KVA$\\
+				$S_3=8+j0 \quad KVA$
+			\end{center}
+		Then:
+		\begin{center}
+			$S=S_1+S_2+S_3=30+j20$
+		\end{center}
+		And:
+		\begin{center}
+			$200I^*=S$\\
+			$I=150-j100$
+		\end{center}
+	 	Then:
+	 	\begin{center}
+	 		$Z=\frac{200}{150-j100}=0.923+j0.615=1.11\angle33.69^\circ$
+	 	\end{center}
+ 		b).By a:
+ 		\begin{center}
+ 			$pf=cos(33.69^\circ)=0.8321 \quad lagging$
+ 		\end{center}	
+		\end{quote}
+		
+		\clearpage
+		\item (10 Points)
+		\begin{quote}
+			Ans:\\
+			a).Open circuit:
+			\begin{center}
+				$v_{Th}=\frac{760}{28+j96}(j50)=364.8+j106.4$
+			\end{center}
+			Short circuit:
+			\begin{center}
+				$(28+j96)I_1-j50I_{sc}=120$\\
+				$-j50I_1-(31+j100)I_{sc}=0$
+			\end{center}
+			Thus:
+			\begin{center}
+				$I_{sc}=0.48-j0.518$\\
+				$|I_{sc}|=0.7A$
+			\end{center}
+			Then:
+			\begin{center}
+				$Z_{Th}=\frac{V_{Th}}{I_{sc}}=521+j152$\\
+				$Z_L=Z_{Th}^*=521-j152$\\
+				$I_L=\frac{v_{Th}}{Z_{Th}+Z_L}=0.35+j0.1$
+				$P_L=|I_L|^2Re(Z_L)=69W$
+			\end{center}
+			b).By the question:
+			\begin{center}
+				$I_1=\frac{Z_{22}I_2}{j\omega M}=0.762-j0.0017=0.762\angle 1.28^\circ$
+			\end{center}
+		And:
+		\begin{center}
+			$P_{tr}=760\times 0.762\times cos1.28 -(0.762)^2\times 8=161.4W$\\
+			$\% delivered=\frac{69}{161.4}\times 100= 42.75\%$
+		\end{center}
+		\end{quote}
+	
+		\clearpage
+		\item (10 Points)
+		\begin{quote}
+			Ans:\\
+			a).By the question:
+			\begin{center}
+				$I_{aA}=\frac{200}{25}=8A\quad (rms)$\\
+				$I_{bB}=\frac{200\angle-120^\circ}{30-j40}=4\angle -66.87^\circ A\quad (rms)$\\
+				$I_{cC}=\frac{200\angle120^\circ}{80-j60}=2\angle 83.13^\circ A\quad (rms)$
+			\end{center}
+			The magnitudes are unequal and the phase angles are not $120^\circ apart.$\\
+			b).\begin{center}
+				$I_0=I_{aA}+I_{bB}+I_{cC}=9.96\angle-9.79^\circ A\quad (rms)$
+			\end{center}
+		\end{quote}
+
+
+	\end{enumerate}
+\end{document}

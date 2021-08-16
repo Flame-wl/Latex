@@ -1,0 +1,357 @@
+%告知 CTeX 这个文件是用 UTF-8 编码
+% !Mode:: "TeX:UTF-8"
+
+%使用 pdflatex
+%!TEX program = pdflatex
+
+
+\documentclass[12pt,a4paper]{article}
+%正文字体大小为12pt, 页面规格是A4, 使用article文档格式
+\usepackage[utf8]{inputenc}
+%作用是inputenc用来识别输入编码
+
+
+\usepackage[left=2.2cm,right=2.2cm,top=3cm,bottom=2.5cm]{geometry}
+%latex设置页面边距，页面大小，页边距
+\usepackage{mathtools}
+%数学公式扩展宏包，提供了公式编号定制和更多的符号、矩阵等
+\usepackage{booktabs}  
+%booktabs宏包画三线表，线条精细可变
+\usepackage{graphicx} 
+%支持插图
+\usepackage{listings}
+%提供了排版关键字高亮的代码环境 lslisting 以及对版式的自定义。
+%类似宏包有minted
+\usepackage{amssymb}
+%打出因为所以那三个点的宏包， 导言区宏包
+
+\lstset{%使用\lstset{}进行代码环境的设置
+	backgroundcolor=\color{cyan!10},%% 选择代码背景，必须加上\ usepackage {color}或\ usepackage {xcolor}.
+	basicstyle=\ttfamily, % 设置代码字号.
+	numbers=left,% 给代码添加行号，可取值none, left, right.
+	numberstyle=\scriptsize %小六号 \scriptsize
+	% numberstyle=\tiny\color{mygray}, % 行号的字号和颜色
+}
+
+\usepackage{fancyhdr}
+%修改页眉页脚格式，令页眉页脚可以左对齐、居中、右对齐
+
+\usepackage{tikz}%以 TikZ 为基础提供排版样式丰富的彩色盒子的功能
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+%欧式电阻，美式电感
+
+\usepackage{indentfirst} %令章节标题后的第一段首行缩进
+\usepackage[wby]{callouts}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{white},  %背景颜色 
+	commentstyle=\color{codegreen}, %注释风格
+	keywordstyle=\color{magenta},   %关键字风格 红紫色
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize\ttfamily,breaklines=true,
+	%设置代码的大小  选择一种等宽（“打字机”）字体族  对过长的代码自动换行  
+	breakatwhitespace=false, %空格中断
+	xleftmargin=20pt, %x左边框
+	xrightmargin=20pt,%x右边框       
+	breaklines=true,  %代码过长则换行               
+	captionpos=b,     % 设置标题位置.               
+	keepspaces=true,  % 保留空格    有助于保持代码的缩进 possibly needs columns=flexible           
+	numbers=left,     % 给代码添加行号，可取值none, left, right.                   
+	numbersep=5pt,    % 设置行号与代码之间的间隔              
+	showspaces=false, % 显示每个地方添加特定下划线的空格; 覆盖了'showtringspaces'               
+	showstringspaces=false, % 仅在字符串中允许空格
+	showtabs=false,   % 在字符串中显示添加特定下划线的制表符               
+	tabsize=2,        % 将默认tab设置为2个空格  
+	framextopmargin=50pt,%代码区定框
+	frame=bottomline,   %代码区底部
+	basicstyle=\footnotesize\ttfamily,  % 设置代码字号
+	language=Octave     % 使用的语言
+}
+\usepackage{ulem}%提供排版可断行下划线的命令 \uline 以及其它装饰文字的命令
+\lstset{style=mystyle} %代码环境设置  自定义版式，将mystyle中版式导入
+\linespread{1.5}       %行距1.5倍 
+\title{\textbf{\texttt{Electric Circuits - Homework 04}}}
+\author{Automation Class 1904}
+\pagestyle{fancy}   %使用fancy风格
+\fancyhf{} % 清空当前设置
+\rhead{HW3 Edition} %页眉右边
+\rfoot{fireowl}       %页脚右边
+\lhead{Electric Circuits} % 页眉左边
+\cfoot{\thepage}    %页脚中间 页码
+\thispagestyle{plain}
+% empty
+% 无页眉页脚
+% plain
+% 无页眉，页脚为居中页码
+% headings
+% 页眉为章节标题，无页脚
+% myheadings
+% 页眉内容可自定义，无页脚
+\date{(Due date: 2020/12/27)}%自定义日期\today显示电脑上的日期-英文版
+
+\begin{document}
+	\maketitle
+	
+	\begin{enumerate}	
+		\item (10 Point)
+			Ans:
+		\begin{quote}
+			a).By the question and figure:
+			\\right:
+			\begin{center}
+				$-2\frac{di_g}{d_t} + 16\frac{di_2}{d_t}+32i_2 = 0$
+			\end{center}
+			\begin{center}
+				$8\frac{di_2}{d_t} + 16i_2 = \frac{di_g}{d_t}$
+			\end{center}
+			b).From the question :
+			\begin{center}
+				$i_2=e^{-t}-e^{-2t}$
+			\end{center}
+			Then we know:
+			\begin{center}
+				$8\frac{di_2}{d_t} + 16i_2=-8e^{-t}+16e^{-2t}+16e^{-t}-16e^{-2t} = 8e^{-t}$
+				\\$\frac{di_g}{d_t} = 8e^{-t}$
+			\end{center}
+			Thus, satisfied.\\
+			c).By question b and a:
+			\begin{center}
+				$v_1 = 4\frac{di_g}{d_t}-2\frac{di_2}{d_t} = 34e^{-t}-4e^{-2t}$
+			\end{center}
+			d).By the question c:
+			\begin{center}
+				$v_1{(0)} = 30v$
+			\end{center}
+			Yes, it make sense.
+		\end{quote}
+		\clearpage %另起一页
+		
+		\item (10 Points)
+		\begin{quote}
+		a).By the question, $i_1 and i_2$ is clockwise mesh currents in the left and right.\\
+		Then use Mesh-current method:
+		\begin{center}
+			$v_{ab} = L_1\frac{di_1-i_2}{dt}+M\frac{di_2}{dt}$\\
+			$0=L_2\frac{di_2}{dt}+M\frac{di_1-i_2}{dt}-L_1\frac{di_1-i_2}{dt}-M\frac{i_2}{dt}$
+		\end{center}
+		Simplified:
+		\begin{center}
+		    $v_{ab}=L_1\frac{di_1}{dt}+(M-L_1)\frac{di_2}{dt}$\\
+		    $0=(L_1-M)\frac{di_1}{dt}+(L_1+L_2-2M)\frac{di_2}{dt}$
+		\end{center}
+		Thus:
+		\begin{center}
+			$v_{ab}=(\frac{L_1+L_2-2M}{L_1L_2-M^2})\frac{di_1}{dt}$
+		\end{center}
+		from which we have:
+		\begin{center}
+			$L_{ab}=\frac{L_1L_2-M^2}{L_1+L_2-2M}$
+		\end{center}
+		b).If the magnetic polarity of coil 2 is reversed, the sign of M reverses,therefore
+		\begin{center}
+			$L_{ab}=\frac{L_1L_2-M^2}{L_1+L_2+2M}$
+		\end{center}
+		\end{quote}
+		\clearpage
+		
+		\item (20 Points)Ans:
+		\begin{quote}
+		With no finger on the button the circuit and $i = C\frac{dv}{dt}$,then we know:
+		\begin{center}
+			$C_1\frac{dv-v_s}{i}+C_2\frac{dv-v_s}{t} = 0$\\
+			$C_1=C_2$
+		\end{center}
+		Thus:
+		\begin{center}
+			$2C\frac{dv}{dt}$
+		\end{center}
+		With a finger on the button:
+		\begin{center}
+			$C_1\frac{dv-v_s}{i}+C_2\frac{dv-v_s}{t}+C_3\frac{dv}{dt} = 0$
+		\end{center}
+		Simplified:
+		\begin{center}
+			$(C_1+C_2+C_3)\frac{dv}{dt}+C_2\frac{dv_s}{dt}-C1\frac{dv_s}{dt}=0$\\
+			$C_1=C_2=C_3$
+		\end{center}
+		Thus:
+		\begin{center}
+			$3C\frac{dv}{dt}=0$
+		\end{center}
+		Since,there is no change in the output voltage of this circuit.
+		\end{quote}
+		\clearpage
+		\item (10 Points)
+		\begin{quote}
+			Ans:
+			$t < 0$:
+			\begin{center}
+				$i_L=\frac{2.5v_0}{v_0} = 2.5A$
+			\end{center}
+			$t > 0$:Find Thevenin resistance seen by inductor:
+			\begin{center}
+				$i_T = 2.5A$\\
+				$R_{Th}=\frac{v_T}{i_T}=0.4$
+			\end{center}
+			Thus:
+			\begin{center}
+				$\tau = \frac{L}{R} = 12.5ms$\\
+				$\frac{1}{\tau} = 80$
+			\end{center}
+			Then:
+			\begin{center}
+				$i_0 = 2.5e^{-80t}A$\\
+				$v_0 = L\frac{di_0}{dt} = -e^{-80}$\qquad $t\ge0$
+			\end{center}
+		\end{quote}
+		
+		\clearpage
+		\item (10 Points)
+		\begin{quote}
+			Ans:\\
+			a).By the question and figure
+			\begin{center}
+				$v_0(0^-) =v_0(0^+)=120V$
+			\end{center}
+			Make 2.5$k\Omega$ resistor the right hand to Source Transformation.we will get resistor $37.5k\Omega$ and source 150V series.
+			\begin{center}
+				$v_0=-150V$\\
+				$R_{eq} = 50k\Omega$
+			\end{center}
+			then:
+			\begin{center}
+				$\tau=RC=1.6ms$
+				\\$\frac{1}{\tau}=625$
+			\end{center}
+			Thus:
+			\begin{center}
+				$v_0=-150+(120-(-150))e^{-625t}$\\
+				$v_0=-150+270e^{-625t}$
+			\end{center}
+			b).By the question:
+			\begin{center}
+				$i_0=C\frac{dv}{dt}=6.75e^{-625t}mA$
+			\end{center}
+			c).By the question:
+			\begin{center}
+				$v_g=v_0-2.5\times 10^3=-150+253.125e^{-625t}$  
+			\end{center}	
+			d).By the question c:
+				\begin{center}
+					$v_g(0) = 103.125V$
+				\end{center}
+		\end{quote}
+		\clearpage
+		
+		\item (10 Points)
+		\begin{quote}
+			Ans:\\
+			When $0\leq t \leq 200\mu s$:
+			\begin{center}
+				$R_{eq}=150||100=60k\Omega$\\
+				$\tau =RC=200\mu s$\\
+				$\frac{1}{\tau} = 5000$
+			\end{center}
+			Thus:
+			\begin{center}
+				$v_c = 300e^{-5000t}$\\
+				$v_c(200\mu s) = 110.36$
+			\end{center}
+		when $200\mu s \leq t \leq \infty$:
+		\begin{center}
+			$R_{eq} = 30||60+120||40=50K\Omega$\\
+			$\tau = R_{eq}C = 166.67\mu s$\\
+			$\frac{1}{\tau} = 6000$
+		\end{center}
+		Thus:
+		\begin{center}
+			$v_c = 110.36e^{-6000(t-200\mu s)}V$
+		\end{center}
+		When t = $300\mu s$:
+		\begin{center}
+			$v_c(300\mu s)=110.36e^{-6000(100\mu s)}=60.57V$\\
+			$i_0(300\mu s)=\frac{u_c}{R_{eq}}=1.21mA$
+		\end{center}
+		Then:
+		\begin{center}
+			$i_1=\frac{60}{90}i_0=\frac{2}{3}i_0=0.8067mA$(direction down);
+			\qquad $i_2=\frac{40}{160}i_0=\frac{1}{4}i_0 = 0.3025mA$ (direction down);
+		\end{center}
+	 	\begin{center}
+	 		$i_{mid} = i_1-i_2= \frac{5}{12}i_0=0.5mA$(direction right)
+	 	\end{center}
+		\end{quote}
+	
+		\clearpage
+		\item (20 Points)
+		\begin{quote}
+			Ans:\\
+			By the question and figure:Find Thevenin resistance seen by capacitor
+			\begin{center}
+				$v_T=13\times 10^4i_\Delta+(20k\Omega || 80k\Omega)i_T$\\
+				$i_\Delta = -\frac{20}{100}i_T=-0.2i_T$
+			\end{center}
+			Then:
+			\begin{center}
+				$v_T=-10\times 10^3i_T$
+			\end{center}
+			Thus:
+			\begin{center}
+				$R_{Th} = \frac{v_T}{i_T}=-10k\Omega$\\
+				$\tau = R_{Th}C=-0.025$\\
+				$\frac{1}{\tau} = -40$
+			\end{center}
+			Since:
+			\begin{center}
+				$v_c=20e^{40t}V$
+			\end{center}
+			when $v_c = 20000V$
+			\begin{center}
+				$40t = ln1000$\\
+				$t = 172.69ms$
+			\end{center}
+		\end{quote}
+		
+		\clearpage
+		\item (10 Points)
+		\begin{quote}
+			Ans:\\
+			a).By the question and figure, When $0 \leq t \leq 0.5$:
+			\begin{center}
+				$i = \frac{21}{60} + (\frac{30}{60}-\frac{21}{60})e^{-\frac{t}{\tau}}$\\
+				$\tau = \frac{L}{R}$
+			\end{center}
+			Thus :
+			\begin{center}
+				$i=0.35+0.15e^{-\frac{-60t}{L}}$
+			\end{center}
+			When t = 0.5:
+			\begin{center}
+				$i(0.5)=0.35+0.15e^{-\frac{-30}{L}}=0.40$
+			\end{center}
+			So:
+			\begin{center}
+				$e^{-\frac{30}{L}} = 3;$\\
+				$L=\frac{30}{ln3}=27.31H$	
+			\end{center}
+			b).Hypothesized $t_r$ is the time the relay releases:$\qquad 0 \leq t \leq t_r$
+			\begin{center}
+				$i=0+(\frac{30}{60}-0)e^{\frac{-60t}{L}} = 0.5e^{\frac{-60t}{L}}$
+			\end{center}
+			When i = 0.4, the relay released:
+			\begin{center}
+				$0.4=0.5e^{\frac{-60t_r}{L}}$
+			\end{center}
+			Thus:
+			\begin{center}
+				$t_r = \frac{27.31ln1.25}{60} \cong 0.1s$
+			\end{center}
+			 
+		\end{quote}
+		
+		
+		
+		
+	\end{enumerate}
+\end{document}

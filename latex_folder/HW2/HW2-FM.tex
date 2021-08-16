@@ -1,0 +1,134 @@
+%告知 CTeX 这个文件是用 UTF-8 编码
+% !Mode:: "TeX:UTF-8"
+
+%使用 pdflatex
+%!TEX program = pdflatex
+
+
+\documentclass[12pt,a4paper]{article}
+%正文字体大小为12pt, 页面规格是A4, 使用article文档格式
+\usepackage[utf8]{inputenc}
+%作用是inputenc用来识别输入编码
+\usepackage[left=2.2cm,right=2.2cm,top=3cm,bottom=2.5cm]{geometry}
+%latex设置页面边距，页面大小，页边距
+\usepackage{mathtools}
+%数学公式扩展宏包，提供了公式编号定制和更多的符号、矩阵等
+\usepackage{booktabs}  
+%booktabs宏包画三线表，线条精细可变
+\usepackage{graphicx} 
+%支持插图
+\usepackage{listings}
+%提供了排版关键字高亮的代码环境 lslisting 以及对版式的自定义。
+%类似宏包有minted
+
+\lstset{%使用\lstset{}进行代码环境的设置
+backgroundcolor=\color{cyan!10},%% 选择代码背景，必须加上\ usepackage {color}或\ usepackage {xcolor}.
+basicstyle=\ttfamily, % 设置代码字号.
+numbers=left,% 给代码添加行号，可取值none, left, right.
+numberstyle=\scriptsize %小六号 \scriptsize
+% numberstyle=\tiny\color{mygray}, % 行号的字号和颜色
+}
+
+\usepackage{fancyhdr}
+%修改页眉页脚格式，令页眉页脚可以左对齐、居中、右对齐
+
+\usepackage{tikz}%以 TikZ 为基础提供排版样式丰富的彩色盒子的功能
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+%欧式电阻，美式电感
+
+\usepackage{indentfirst} %令章节标题后的第一段首行缩进
+\usepackage[wby]{callouts}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{white},  %背景颜色 
+    commentstyle=\color{codegreen}, %注释风格
+    keywordstyle=\color{magenta},   %关键字风格 红紫色
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize\ttfamily,breaklines=true,
+    %设置代码的大小  选择一种等宽（“打字机”）字体族  对过长的代码自动换行  
+    breakatwhitespace=false, %空格中断
+    xleftmargin=20pt, %x左边框
+    xrightmargin=20pt,%x右边框       
+    breaklines=true,  %代码过长则换行               
+    captionpos=b,     % 设置标题位置.               
+    keepspaces=true,  % 保留空格    有助于保持代码的缩进 possibly needs columns=flexible           
+    numbers=left,     % 给代码添加行号，可取值none, left, right.                   
+    numbersep=5pt,    % 设置行号与代码之间的间隔              
+    showspaces=false, % 显示每个地方添加特定下划线的空格; 覆盖了'showtringspaces'               
+    showstringspaces=false, % 仅在字符串中允许空格
+    showtabs=false,   % 在字符串中显示添加特定下划线的制表符               
+    tabsize=2,        % 将默认tab设置为2个空格  
+    framextopmargin=50pt,%代码区定框
+    frame=bottomline,   %代码区底部
+    basicstyle=\footnotesize\ttfamily,  % 设置代码字号
+    language=Octave     % 使用的语言
+}
+\usepackage{ulem}%提供排版可断行下划线的命令 \uline 以及其它装饰文字的命令
+\lstset{style=mystyle} %代码环境设置  自定义版式，将mystyle中版式导入
+\linespread{1.5}       %行距1.5倍 
+\title{\textbf{\texttt{Electric Circuits - Homework 01}}}
+\author{Automation Class 1802}
+\pagestyle{fancy}   %使用fancy风格
+\fancyhf{} % 清空当前设置
+\rhead{HW2 Edition} %页眉右边
+\rfoot{fireowl}       %页脚右边
+\lhead{Electric Circuits} % 页眉左边
+\cfoot{\thepage}    %页脚中间 页码
+\thispagestyle{plain}
+% empty
+% 无页眉页脚
+% plain
+% 无页眉，页脚为居中页码
+% headings
+% 页眉为章节标题，无页脚
+% myheadings
+% 页眉内容可自定义，无页脚
+\date{(Due date: 2020/10/5)}%自定义日期\today显示电脑上的日期-英文版
+
+
+\begin{document}
+\maketitle
+
+%section
+{\large This assignment covers \uwave{Ch3 and Ch4.1-4.9} of the textbook. The full credit is \uwave{100 points}. For each question, \uwave{detailed derivation processes} and \uwave{accurate numbers} are required to get full credit.}
+
+\begin{enumerate}
+    \item (10 points) \uline{Problem 3.8} of the textbook (p100), while the right resistor is change from 6 $\Omega$ to 9 $\Omega$.%欧姆符号要用美元符号
+    %item 自动换行
+    %\par%或者两个回车，表示换行
+
+
+    ans:\\%强制分行：\\ 或 \\*[和下行间距离]
+    \begin{quote}
+
+    \begin{center}
+        \begin{circuitikz}[american voltages, american currents, american resistors]
+            \draw (0, 0) to[short, *- ] (-3,0) to[V, -*, l^=$300V$] (-3, 3) to [R, -*, l^=R, f_=$i_e$] (0, 3) to[-, R, l=$170\Omega$, f=$i_a$](0,0) to[R, -, l=$18\Omega$] (3, 0) to[R, -*, l^=$12\Omega$, f<_=$i_d$, v<=$60 V$] (3, 3) to[-, short] (3, 4.5) to[R, -, l=$50\Omega$, f<_=$i_b$] (-3, 4.5) to (-3, 3);
+            \draw (0, 3) to[R, -, l=$10\Omega$, f=$i_c$] (3,3);
+            \node at (-3.2, 3){a};
+            \node at (0, 3.3){b};
+            \node at (3.2, 3){c};
+            \node at (0, -0.3){d};
+        \end{circuitikz} 
+    \end{center}
+
+    \end{quote}
+
+    
+    \item (10 points) \uline{Problem 3.60} of the textbook (p107), while the voltage source is changed from 500 V to 900 V and the right resistor is changed from 27 $\Omega$ to 17 $\Omega$.
+    
+    
+    \item (10 points) \uline{Problem 3.71} of the textbook (p109).
+    
+    
+    \item (15 points) \uline{Problem 4.27} of the textbook (p155), while the voltage source is changed from 24 V to 18 V and the voltage-controlled voltage source is changed for 5v${_\Delta}$ to 3v${_\Delta}$. Also calculate v$_0$ when the 33-$\omega$ resistor is climinated.
+    \item (20 points) \uline{Problem 4.38} of the textbook (p156), while the voltage source is changed from 135 V to 225 V. Also find the power extracted or dissipated by the current con-trolled voltage source.
+    \item (10 points) \uline{Problem 4.45} of the textbook (p157), while the current source is changed from 20 A to 160 A and the current-controlled voltage source is changed from 6.5i${_\Delta}$ to 8i${_\Delta}$.
+    \item (10 points) \uline{Problem 4.58} of the textbook (p158), while the top current source is changed from 4 A to 10 A.
+    \item (10 points) \uline{Problem 4.59} of the textbook (p159), while the right current source is changed from 0.6 mA to 1.2 mA.
+
+
+
+\end{enumerate}
+\end{document}

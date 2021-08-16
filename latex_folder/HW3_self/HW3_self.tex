@@ -1,0 +1,631 @@
+%告知 CTeX 这个文件是用 UTF-8 编码
+% !Mode:: "TeX:UTF-8"
+
+%使用 pdflatex
+%!TEX program = pdflatex
+
+
+\documentclass[12pt,a4paper]{article}
+%正文字体大小为12pt, 页面规格是A4, 使用article文档格式
+\usepackage[utf8]{inputenc}
+%作用是inputenc用来识别输入编码
+
+
+\usepackage[left=2.2cm,right=2.2cm,top=3cm,bottom=2.5cm]{geometry}
+%latex设置页面边距，页面大小，页边距
+\usepackage{mathtools}
+%数学公式扩展宏包，提供了公式编号定制和更多的符号、矩阵等
+\usepackage{booktabs}  
+%booktabs宏包画三线表，线条精细可变
+\usepackage{graphicx} 
+%支持插图
+\usepackage{listings}
+%提供了排版关键字高亮的代码环境 lslisting 以及对版式的自定义。
+%类似宏包有minted
+\usepackage{amssymb}
+%打出因为所以那三个点的宏包， 导言区宏包
+
+\lstset{%使用\lstset{}进行代码环境的设置
+backgroundcolor=\color{cyan!10},%% 选择代码背景，必须加上\ usepackage {color}或\ usepackage {xcolor}.
+basicstyle=\ttfamily, % 设置代码字号.
+numbers=left,% 给代码添加行号，可取值none, left, right.
+numberstyle=\scriptsize %小六号 \scriptsize
+% numberstyle=\tiny\color{mygray}, % 行号的字号和颜色
+}
+
+\usepackage{fancyhdr}
+%修改页眉页脚格式，令页眉页脚可以左对齐、居中、右对齐
+
+\usepackage{tikz}%以 TikZ 为基础提供排版样式丰富的彩色盒子的功能
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+%欧式电阻，美式电感
+
+\usepackage{indentfirst} %令章节标题后的第一段首行缩进
+\usepackage[wby]{callouts}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{white},  %背景颜色 
+    commentstyle=\color{codegreen}, %注释风格
+    keywordstyle=\color{magenta},   %关键字风格 红紫色
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize\ttfamily,breaklines=true,
+    %设置代码的大小  选择一种等宽（“打字机”）字体族  对过长的代码自动换行  
+    breakatwhitespace=false, %空格中断
+    xleftmargin=20pt, %x左边框
+    xrightmargin=20pt,%x右边框       
+    breaklines=true,  %代码过长则换行               
+    captionpos=b,     % 设置标题位置.               
+    keepspaces=true,  % 保留空格    有助于保持代码的缩进 possibly needs columns=flexible           
+    numbers=left,     % 给代码添加行号，可取值none, left, right.                   
+    numbersep=5pt,    % 设置行号与代码之间的间隔              
+    showspaces=false, % 显示每个地方添加特定下划线的空格; 覆盖了'showtringspaces'               
+    showstringspaces=false, % 仅在字符串中允许空格
+    showtabs=false,   % 在字符串中显示添加特定下划线的制表符               
+    tabsize=2,        % 将默认tab设置为2个空格  
+    framextopmargin=50pt,%代码区定框
+    frame=bottomline,   %代码区底部
+    basicstyle=\footnotesize\ttfamily,  % 设置代码字号
+    language=Octave     % 使用的语言
+}
+\usepackage{ulem}%提供排版可断行下划线的命令 \uline 以及其它装饰文字的命令
+\lstset{style=mystyle} %代码环境设置  自定义版式，将mystyle中版式导入
+\linespread{1.5}       %行距1.5倍 
+\title{\textbf{\texttt{Electric Circuits - Homework 03}}}
+\author{Automation Class 1904}
+\pagestyle{fancy}   %使用fancy风格
+\fancyhf{} % 清空当前设置
+\rhead{HW3 Edition} %页眉右边
+\rfoot{fireowl}       %页脚右边
+\lhead{Electric Circuits} % 页眉左边
+\cfoot{\thepage}    %页脚中间 页码
+\thispagestyle{plain}
+% empty
+% 无页眉页脚
+% plain
+% 无页眉，页脚为居中页码
+% headings
+% 页眉为章节标题，无页脚
+% myheadings
+% 页眉内容可自定义，无页脚
+\date{(Due date: 2020/10/5)}%自定义日期\today显示电脑上的日期-英文版
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+	
+    \item (10 Point)
+    \begin{quote}
+    	Ans:
+        \begin{center}
+            \begin{circuitikz}[american]
+                \draw (0,0) to [V, l=$60V$,-*,invert] (0,3) 
+                to [R, l=$10\Omega$] (3,3) 
+                to [R, l= $8\Omega$,*-*] (6,3)
+                to [short,-*] (8,3);
+                \draw (3,3) to[R, l=$40\Omega$, *-*] (3,0);
+                \draw(0,0) to[short,-*] (8,0);
+                \draw (0,3) to (0,5)
+                to [I, l= $6A$] (6,5)
+                to (6,3);
+                \node at (8,3.2)[blue] {a};
+                \node at (8,-0.3)[blue] {b};
+            \end{circuitikz}
+        \end{center}
+    	We make the voltage source and the current source deactivated.
+    	\begin{center}
+    		\begin{circuitikz}[american]
+    			\draw (0,0) to (0,3) 
+    			to [R, l=$10\Omega$] (3,3) 
+    			to [R, l= $8\Omega$,*-] (6,3)
+    			to [short,-*] (8,3);
+    			\draw (3,3) to[R, l=$40\Omega$, *-*] (3,0);
+    			\draw(0,0) to[short,-*] (8,0);
+    			\node at (8,3.2)[blue] {a};
+    			\node at (8,-0.3)[blue] {b};
+    		\end{circuitikz}
+    	\end{center}
+    	Then we can calculate the equivalent resistance R$_{eq}$;
+    	\begin{center}
+    		$R_{eq} = 8 + 10||40 = 16\Omega$
+    	\end{center}
+    	The next step is to replace a short circuit across the terminals:
+    	\begin{center}
+    		\begin{circuitikz}[american]
+    			\draw (0,0) to [V, l=$60V$,-*,invert] (0,3) 
+    			to [R, l=$10\Omega$] (3,3) 
+    			to [R, l= $8\Omega$,*-*] (6,3)
+    			to [short,-*] (8,3);
+    			\draw (3,3) to[R, l=$40\Omega$, *-*] (3,0);
+    			\draw(0,0) to[short,-*] (8,0);
+    			\draw (0,3) to (0,5)
+    			to [I, l= $6A$] (6,5)
+    			to (6,3);
+    			\node at (8,3.2)[blue] {a};
+    			\node at (8,-0.3)[blue] {b};
+    			\draw (8,3) to (8,0);
+    			\draw (7.8,2)  [->, -latex, blue] to (7.8,1);%注意电流方向要与电压降方向一致，否则等式要加负号
+    			\node at (7.5,1.5) [blue] {i$_{sc}$};
+    			
+    			\draw (2.5,1.5)  [<-]arc(0:270:0.8);    %!!! 这个画曲线箭头非常可
+    			\node at (1.8,1.5) [blue ]{$i_1$};
+    			\draw (3.8,3.8)  [<-]arc(0:270:0.7);    %!!! 这个画曲线箭头非常可
+    			\node at (3.2,3.8) [blue ]{$i_2$};
+    			\draw (6.4,1.5)  [<-]arc(0:270:0.8);    %!!! 这个画曲线箭头非常可
+    			\node at (5.6,1.5) [blue ]{$i_3$};
+    		\end{circuitikz}
+    	\end{center}
+    	and use the Mesh-Current method calculate the resulting short-curcuit current:
+    	\begin{center}
+    		$10(i_1 - i_2) + 40(i_1 - i_3) - 60 = 0$\\
+    		$10(i_2 - i_1) + 8(i_2-i_3) = 0$\\
+    		$8(i_3 - i_2) + 40(i_3-i_2) = 0$\\
+    		$i_2 = 6A$ \\ $i_3 = i_{sc}$ 		
+    	\end{center}
+    	Thus the i$_{sc}$ is equal:
+    	\begin{center}
+    		$i_{sc} = 5.25A$
+    	\end{center}
+    	The circuit shown in:
+    	\begin{center}
+    		\begin{circuitikz}[american]
+    			\draw (0,0) to [I, l=$5.25A$,-*] (0,3) 
+    			to [R, l=$12\Omega$] (3,3) ;
+
+    			
+    			\draw (3,3) to [short, -*] (5,3);
+    			\draw (0,0) to [short, -*] (5,0);
+    			\node at (5,3.2)[blue] {a};
+    			\node at (5,-0.3)[blue] {b};
+    		\end{circuitikz}
+    	\end{center}  
+    \end{quote}
+	\clearpage %另起一页
+	
+	\item (10 Points)
+	\begin{quote}
+		Ans:
+		
+		\begin{center}
+			\begin{circuitikz}[american]
+				\draw (0,0) to [cV, l= $20i_\Delta$, invert] (0,3)
+				to  [R= $10\Omega$, *-*] (3,3) 
+				to [R = $12\Omega$, -*, f_<= $i_\Delta$] (6,3)
+				to [short, -*] (8,3) ;
+				
+				\draw (0,3) to (0,5) to[R = $6\Omega$] (6,5) to (6,3);
+				\draw (3,3) to[R= $2.5\Omega$, -*] (3,0);
+				\draw (0,0) to [short, -*] (8,0);
+				
+				\node at (8,3.3) [blue] {a};
+				\node at (8,-0.3) [blue] {b};
+				
+				\draw (8,0) to [I, l= $1A$]	(8,3);	 
+				
+				\node at(6.3, 2.7) {+};
+				\node at (6.3, 1.5) {$u_T$};
+				\node at (6.3, 0.3) {-};
+				\node at (3, 3.3) [red] {$u_1$};
+				
+			\end{circuitikz}
+		\end{center}
+		Because there no independent source,  so $v_{Th}$ = 0;Add a independent current source for 1A at port ab;\\
+		According the Node-Voltage method:
+		\begin{center}
+			$\frac{u_1- 20i_\Delta}{10} + \frac{u_1 - u_T}{12} + \frac{u_1}{2.5} = 0$\\
+			$\frac{u_T - 20i_\Delta}{6} + \frac{u_T - u_1}{12} - 1 = 0$\\
+			$\frac{u_T- u_1}{12} = i_\Delta$
+		\end{center}
+		We can get :
+		\begin{center}
+				$i_\Delta = 1.5A$ \qquad $u_1 = 9V$ \qquad $u_T = 27V$
+		\end{center}
+
+		if we add a independent current cource for 2A at port ab:
+		\begin{center}
+				$i_\Delta = 3A$ \qquad $u_1 = 18V$ \qquad $u_T = 54V$
+		\end{center}
+		Thus when we add a independent current cource for nA at port ab:
+		\begin{center}
+			$i_\Delta = 1.5nA$ \qquad $u_1 = 9nV$ \qquad $u_T = 27nV$
+		\end{center}
+
+	
+	\end{quote}
+\clearpage
+	\item (20 Points)
+	\begin{quote}
+		Ans:
+		\begin{center}
+			\begin{circuitikz}[american]
+				\draw (0,0) to [V, l=200V, invert] (0,3) 
+				to [R, l= 25$\Omega$, -*] (3,3)
+				to [R, l = 10$\Omega$, -*] (6,3)
+				to (9,3) to [vR , l= $R_0$] (9,0) to (0,0);
+				
+				\draw (3,3) to [R, l= 100$\Omega$, -*] (3,0);
+				\draw (6,3) to [R, l= $100\Omega$] (6,1.5) to [cV, l= $30i_x$] (6,0);
+				
+				\draw (4,2.6)  [->, -latex, blue] to (5,2.6);
+				\node at (5.3, 2.6) [blue] {$i_x$};
+				
+			\end{circuitikz}
+		\end{center}
+		Using Source Transformation to be:
+		\begin{center}
+			\begin{circuitikz}[american]
+				\draw (0,0) to [V, l=160V, invert] (0,3) 
+				to [R, l= 30$\Omega$, -*] (6,3)
+				to [short, -*](9,3);
+				\draw (0,0) to [short, -*] (9,0);
+				
+				\draw (6,3) to [R, l= $100\Omega$] (6,1.5) to [cV, l= $30i_x$] (6,0);
+				
+				\draw (4,2.6)  [->, -latex, blue] to (5,2.6);
+				\node at (5.3, 2.6) [blue] {$i_x$};
+				
+				\node  at (9, 2.7) {+};
+				\node at (9, 0.3) {-};
+				\node at (9,1.5) {$u_{Th}$};
+			\end{circuitikz}
+		\end{center}
+		then we can calculate $i_x$ :
+		\begin{center}
+			$\frac{160 - 30i_x}{130} = i_x$
+		\end{center}
+		\begin{center}
+			$i_x = 1A$
+		\end{center}
+		since
+		\begin{center}
+			$u_{Th} = 100i_x + 30i_x = 130 V$
+		\end{center} 
+		Using the test-source method to find the Th´evenin resistance gives:
+		\begin{center}
+			\begin{circuitikz}[american]
+				\draw (0,0) to [R, l= 30$\Omega$,] (0,3) 
+				to  (6,3)
+				to [short, -*](9,3);
+				\draw (0,0) to [short, -*] (9,0);
+				
+				\draw (6,3) to [R, l= $100\Omega$] (6,1.5) to [cV, l= $30i_x$] (6,0);
+				
+				\draw (8.5,3.3)  [->, -latex, blue] to (7.5,3.3);
+				\node at (7.2, 3.3) [blue] {$i_{T}$};
+				\draw (4,2.6)  [->, -latex, blue] to (5,2.6);
+				\node at (5.3, 2.6) [blue] {$i_x$};
+				
+				\node  at (9, 2.7) {+};
+				\node at (9, 0.3) {-};
+				\node at (9,1.5) {$u_{T}$};
+			\end{circuitikz}
+		\end{center}
+		Thus use KCL:
+		\begin{center}
+			$i_x = -u_T / 30$\\
+			$i_T = -i_x + \frac{u_T - 30i_x}{100} $
+		\end{center}
+	
+		\begin{center}
+			$R_{eq} = \frac{u_T}{i_T} = 18.75\Omega$
+		\end{center}
+		Then :
+		\begin{center}
+			$P = i^2 \times R = (\frac{u_{Th}}{R_{eq} + R_0})^2 \times R_0 = 225W$
+		\end{center}
+		Thus :
+		\begin{center}
+			$R_0 = \frac{625}{36} \Omega$ \qquad $R_0 = \frac{81}{4}\Omega$
+		\end{center}
+	
+	\end{quote}
+	
+	\item (10 Points)
+	\begin{quote}
+		Ans:
+		\begin{center}
+			\begin{circuitikz}[american]
+				\draw (0,0) to[V, l = 8V, invert] (0,3)
+				to (3,3) to [R, l = 2K$\Omega$, *-*] (6,3) to (9,3)
+				to [I, l = 10mA, invert] (9,0) to (0,0);
+				
+				\draw (3,3) to [R, l = 5K$\Omega$, -*] (3,0);
+				\draw (6,3) to [R, l = $6K\Omega$, -*] (6,0);
+				
+				\draw (6,5) to [I, l_= $10mA$] (3,5);
+				\draw (3,5) [->, -latex] to (3, 3.1);
+				\draw (6,5) [->, -latex] to (6, 3.1);
+				
+				\node at (2.8, 3.2) {a};
+				\node at (6.2, 3.2) {b};
+				\node at (5.4, 1.5) [blue]{$i_o$};
+				
+				\draw (5.6, 2) [->, short, blue] to (5.6,1);
+			\end{circuitikz}
+		\end{center}
+		
+		By hypothesis $i_o' + i_o'' = i_o$:
+		\begin{center}
+			\begin{circuitikz}[american]
+				\draw (0,0) to (0,3)
+				to (3,3) to [R, l = 2K$\Omega$, *-*] (6,3) to (9,3);
+				
+				\draw (9,0) to (0,0);
+				
+				\draw (3,3) to [R, l = 5K$\Omega$, -*] (3,0);
+				\draw (6,3) to [R, l = $6K\Omega$, -*] (6,0);
+				
+				\draw (6,5) to [I, l_= $10mA$] (3,5);
+				\draw (3,5) [->, -latex] to (3, 3.1);
+				\draw (6,5) [->, -latex] to (6, 3.1);
+				
+				\node at (2.8, 3.2) {a};
+				\node at (6.2, 3.2) {b};
+				\node at (5.4, 1.5) [blue]{$i_o$};
+				
+				\draw (5.6, 2) [->, short, blue] to (5.6,1);
+			\end{circuitikz}
+		\end{center}
+		\begin{center}
+			$i_o''= 10\times \frac{2}{2+6} = 2.5mA$
+		\end{center}	
+		
+		\begin{center}
+			$i_o' = i_o - i_o'' = 1mA$
+		\end{center}
+	
+
+		Using KCL to find the value of $i_o$ after the current source is attached:
+		\begin{center}
+			$\frac{U_b' - 8}{2000} + \frac{U_b'}{6000} + 0.01 - 0.01 = 0$
+		\end{center}
+		\begin{center}
+			$u_b' = 6V$ \qquad $i_o' = U_b / 6000 = 1mA$
+		\end{center}
+	\end{quote}
+
+	
+	\item (10 Points)
+	\begin{quote}
+		Ans:
+		\begin{center}
+			\begin{circuitikz}[american]
+				\draw (0,0) to [V, l = $V_{Th}$, invert] (0,3)
+				to [R, l= $R_{Th}$, -*] (3,3) to (5,3) 
+				to [R, l = $30\Omega$] (5,0)
+				to [short , -*] (3,0) to (0,0);
+				
+				\node at (3, 2.7) {+};
+				\node at (3,0.3) {-};
+				\node at (3, 1.5) {60V};
+			\end{circuitikz}
+		\end{center}
+	\end{quote}
+	According to the question :
+	\begin{center}
+		$V_{Th} = 75V$ \qquad $i = \frac{v_0}{R_L} = \frac{60}{30} = 2A$
+	\end{center}
+	Thus :
+	\begin{center}
+		$R_{Th} = \frac{75-60}{2} = 7.5\Omega$
+	\end{center}
+	and:
+	\begin{center}
+		$\frac{V_{Th}}{R_{Th} + R_L} = \frac{v_0}{R_L}$
+	\end{center}
+	Since:
+	\begin{center}
+		$R_{Th} = (\frac{V_{Th}}{v_0} - 1)R_L$
+	\end{center}
+	
+	\item (10 Points)
+	\begin{quote}
+		Ans:\\
+		a).We known from the question:
+		\begin{center}
+			$t : 0 \to 250\mu s\quad(250 \times 10^{-6} s)$ \qquad $C: 0.2\mu F\quad(0.2 \times 10^{-6} F)$\\
+			$v_0 : -100V$ \qquad $i: 100e^{-1000t} mA \quad (0.1e^{-1000t} A)$
+		\end{center}
+\clearpage
+	because of :
+	\begin{center}
+		$i = C \frac{dV}{dt}$;
+	\end{center}
+	Thus:
+	\begin{center}
+		$v = \frac{1}{0.2 \times 10^{-6}} $ $\int_{0}^{250 \times 10^{-6}} 0.1e^{-1000t}\ dt -100$
+	\end{center}
+	Then we can calculate V:
+	\begin{center}
+		$v = 500 (1-e^{-0.25}) - 100 = 10.6V$
+	\end{center}
+	because of:
+	\begin{center}
+		$w = \frac{1}{2} Cv^2$
+	\end{center}
+	Thus :
+	\begin{center}
+		$w = 0.5 \times 0.2\times 10^{-6} \times 10.6^2 = 1.1236\times 10^{-5}J = 11.236 \mu J$
+	\end{center}
+	b).Because of t $\to \infty$;  \\	Thus :
+	\begin{center}
+		$u_{\infty} = 500 - 100= 400V$
+	\end{center}
+	Since :
+	\begin{center}
+		$w_{\infty} = 0.5 \times 0.2\times 10^{-6} \times 400^2 = 0.016J = 1.6 \times 10^4 \mu J$
+	\end{center}	
+	\end{quote}
+	
+	\item (20 Points)
+	\begin{quote}
+		Ans:
+		\begin{center}
+			\begin{circuitikz}[american]
+				\draw (0,0) to [C, l_=$8\mu F$] (0,2.5)
+				to [C, l_= $2\mu F$] (0,5)
+				to [switch, -*] (6, 5);
+				\draw (0,0) to[short, -*] (6,0);
+				
+				\node at (-1, 2.8){+};
+				\node at (-1, 2.2){+};
+				\node at (-1, 4.5){-};
+				\node at (-1, 0.5){-};
+				\node at (-1, 1.25) {25V};
+				\node at (-1, 3.75) {5V};
+				
+				\node at (2, 2.8) [blue]{+};
+				\node at (2, 2.2) [blue]{-};
+				\node at (2, 4.5) [blue]{-};
+				\node at (2, 0.5) [blue]{+};
+				\node at (2, 1.25) [blue]{$v_2$};
+				\node at (2, 3.75)[blue] {$v_1$};
+				
+				\draw (1.5, 5.2) [->, -latex, blue] to (2, 5.2);
+				\node at (1.75, 5.4) [blue] {i(t)};
+				\node at (3,4.6) [blue] {t = 0};
+				
+				\node at (5, 4.5) [blue]{-};
+				\node at (5, 0.5) [blue]{+};
+				\node at (5,2.5) [blue] {$v_0$};
+				
+				\draw (5.5, -0.5) to (5.5, 5.5) to (8, 5.5) to(8,-0.5) to(5.5, -0.5);
+			\end{circuitikz}
+		\end{center}
+	\clearpage
+		a).
+		\begin{center}
+			\begin{circuitikz}[american]
+				\draw (0,0) to [C, l_=$1.6\mu F$] (0,5)
+				to [switch, -*] (6, 5);
+				\draw (0,0) to[short, -*] (6,0);
+				
+			
+				\node at (-1, 2.5) {20V};
+				
+				
+				
+				\draw (1.5, 5.2) [->, -latex, blue] to (2, 5.2);
+				\node at (1.75, 5.4) [blue] {i(t)};
+				\node at (3,4.6) [blue] {t = 0};
+				
+				\node at (5, 4.5) [blue]{-};
+				\node at (5, 0.5) [blue]{+};
+				\node at (5,2.5) [blue] {$v_0$};
+				
+				\draw (5.5, -0.5) to (5.5, 5.5) to (8, 5.5) to(8,-0.5) to(5.5, -0.5);
+			\end{circuitikz}
+		\end{center}
+		Because of :
+		\begin{center}
+			$i = C \frac{dV}{dt}$;
+		\end{center}
+		Thus:
+		\begin{center}
+			$v_0 = \frac{1}{1.6 \times 10^{-6}} $ $\int_{0}^{t} 960\times10^{-6} e^{-30t}\ dt -20$
+		\end{center}
+		\begin{center}
+			$v_0 = -20e^{-30t}V , \quad t\ge 0$
+		\end{center}
+
+		b).In a similar way:
+		\begin{center}
+			$v_1 = \frac{1}{2 \times 10^{-6}} $ $\int_{0}^{t} 960\times10^{-6} e^{-30t}\ dt +5$
+		\end{center}
+		\begin{center}
+			$v_1 =-16e^{-30t} + 21 (V) , \quad t\ge 0$
+		\end{center}
+		c).In a similar way:
+		\begin{center}
+			$v_2 = \frac{1}{8 \times 10^{-6}} $ $\int_{0}^{t} 960\times10^{-6} e^{-30t}\ dt -25$
+		\end{center}
+		\begin{center}
+			$v_2 =-4e^{-30t} - 21 (V) , \quad t\ge 0$
+		\end{center}
+		d).From a). we known $v_0$, then we can calculate p and $w$:
+		\begin{center}
+			$p = -vi = -(-20e^{-30t})(960 \times 10^{-6}e^{-30t}) = 1.92\times10^{-2}e^{-60t}$
+		\end{center}
+	\begin{center}
+		$w_\infty = \int_{0}^{\infty} 1.92\times10^{-2}e^{-60t}\, dt = 3.2\times10^{-4}J = 320\mu J$
+	\end{center}
+		e).Because of $w = \frac{1}{2}Cv^2$
+		\begin{center}
+			$w = 0.5\times (2\times10^{-6})\times 5^2 + 0.5\times (8 \times 10^{-6})\times 25^2 = 2525\mu J$
+		
+		\end{center}
+		f).
+		\begin{center}
+			$w_{trapped} = w_{initial} - w_{delivered} = 2525-320 = 2205\mu J$
+		\end{center}
+		g).When t $\to \infty$:
+		\begin{center}
+			$v_1 = 21V$ \qquad $v_2 = -21V$
+		\end{center}
+		
+		\begin{center}
+			$w = 0.5\times (2\times10^{-6})\times 21^2 + 0.5\times (8 \times 10^{-6})\times (-21)^2 = 2205\mu J$
+		\end{center}
+\end{quote}
+
+\begin{quote}
+	Ans:
+	\begin{center}
+		\begin{circuitikz}[american]
+			\draw(0,0) to [C, l_= 0.5 $\mu F$] (0,2.5)
+			to [R, l = 320$\Omega$] (5,2.5)
+			to [L, l = $20mH$] (5,0) to (0,0);
+			
+			\node at (-1, 2) [blue]{+};
+			\node at (-1, 0.5) [blue]{-};
+			\node at (-1, 1.25) [blue]{$v_1$};
+			
+			\node at (4, 2) [blue]{+};
+			\node at (4, 0.5) [blue]{-};
+			\node at (4, 1.25) [blue]{$v_2$};
+			
+			\draw (3,1.3)  [<-]arc(0:270:0.5);    %!!! 这个画曲线箭头非常可
+			\node at (2.55,1.3) [blue ]{$i_0$};
+		\end{circuitikz}
+	\end{center}
+			
+		From the question :
+		\begin{center}
+			$i_0 = 50e^{-8000t}(cos6000t + 2 sin6000t) mA = 0.05e^{-8000t}(cos6000t + 2 sin6000t)A$
+		\end{center}
+		Then we can calculate:
+		\begin{center}
+			$\frac{di_0}{dt} = e^{-8000t}(200cos6000t - 1100sin6000t)$
+		\end{center}
+		\begin{center}
+			$\frac{di_0}{dt}(0^+) = 1 \times (200 - 0) = 200$
+		\end{center}
+		So $v_2(0^+) = L\frac{di_0}{dt}(0^+) $:
+		\begin{center}
+			$v_2(0^+) = 20 \times 10^{-3}\frac{di_0}{dt}(0^+) = 4V$
+		\end{center}
+		And $v_C = v_R + v_L$:
+		\begin{center}
+			$i_0(0^+) = 0.05A$
+		\end{center}
+		\begin{center}
+			$v_1(0^+) = 320i_0(0^+) + v_2(0^+) = 20V$
+		\end{center}
+\end{quote}
+	 
+	
+
+
+
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,563 @@
+%告知 CTeX 这个文件是用 UTF-8 编码
+% !Mode:: "TeX:UTF-8"
+
+%使用 pdflatex
+%!TEX program = pdflatex
+
+
+\documentclass[12pt,a4paper]{article}
+%正文字体大小为12pt, 页面规格是A4, 使用article文档格式
+\usepackage[utf8]{inputenc}
+%作用是inputenc用来识别输入编码
+\usepackage[left=2.2cm,right=2.2cm,top=3cm,bottom=2.5cm]{geometry}
+%latex设置页面边距，页面大小，页边距
+\usepackage{mathtools}
+%数学公式扩展宏包，提供了公式编号定制和更多的符号、矩阵等
+\usepackage{booktabs}  
+%booktabs宏包画三线表，线条精细可变
+\usepackage{graphicx} 
+%支持插图
+\usepackage{listings}
+%提供了排版关键字高亮的代码环境 lslisting 以及对版式的自定义。
+%类似宏包有minted
+\usepackage{amssymb}
+%打出因为所以那三个点的宏包， 导言区宏包
+
+\lstset{%使用\lstset{}进行代码环境的设置
+backgroundcolor=\color{cyan!10},%% 选择代码背景，必须加上\ usepackage {color}或\ usepackage {xcolor}.
+basicstyle=\ttfamily, % 设置代码字号.
+numbers=left,% 给代码添加行号，可取值none, left, right.
+numberstyle=\scriptsize %小六号 \scriptsize
+% numberstyle=\tiny\color{mygray}, % 行号的字号和颜色
+}
+
+\usepackage{fancyhdr}
+%修改页眉页脚格式，令页眉页脚可以左对齐、居中、右对齐
+
+\usepackage{tikz}%以 TikZ 为基础提供排版样式丰富的彩色盒子的功能
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+%欧式电阻，美式电感
+
+\usepackage{indentfirst} %令章节标题后的第一段首行缩进
+\usepackage[wby]{callouts}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{white},  %背景颜色 
+    commentstyle=\color{codegreen}, %注释风格
+    keywordstyle=\color{magenta},   %关键字风格 红紫色
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize\ttfamily,breaklines=true,
+    %设置代码的大小  选择一种等宽（“打字机”）字体族  对过长的代码自动换行  
+    breakatwhitespace=false, %空格中断
+    xleftmargin=20pt, %x左边框
+    xrightmargin=20pt,%x右边框       
+    breaklines=true,  %代码过长则换行               
+    captionpos=b,     % 设置标题位置.               
+    keepspaces=true,  % 保留空格    有助于保持代码的缩进 possibly needs columns=flexible           
+    numbers=left,     % 给代码添加行号，可取值none, left, right.                   
+    numbersep=5pt,    % 设置行号与代码之间的间隔              
+    showspaces=false, % 显示每个地方添加特定下划线的空格; 覆盖了'showtringspaces'               
+    showstringspaces=false, % 仅在字符串中允许空格
+    showtabs=false,   % 在字符串中显示添加特定下划线的制表符               
+    tabsize=2,        % 将默认tab设置为2个空格  
+    framextopmargin=50pt,%代码区定框
+    frame=bottomline,   %代码区底部
+    basicstyle=\footnotesize\ttfamily,  % 设置代码字号
+    language=Octave     % 使用的语言
+}
+\usepackage{ulem}%提供排版可断行下划线的命令 \uline 以及其它装饰文字的命令
+\lstset{style=mystyle} %代码环境设置  自定义版式，将mystyle中版式导入
+\linespread{1.5}       %行距1.5倍 
+\title{\textbf{\texttt{Electric Circuits - Homework 02}}}
+\author{Automation Class 1904 - 19401100112}
+\pagestyle{fancy}   %使用fancy风格
+\fancyhf{} % 清空当前设置
+\rhead{HW2 Edition} %页眉右边
+\rfoot{fireowl}       %页脚右边
+\lhead{Electric Circuits} % 页眉左边
+\cfoot{\thepage}    %页脚中间 页码
+\thispagestyle{plain}
+% empty
+% 无页眉页脚
+% plain
+% 无页眉，页脚为居中页码
+% headings
+% 页眉为章节标题，无页脚
+% myheadings
+% 页眉内容可自定义，无页脚
+\date{(Due date: 2020/10/17)}%自定义日期\today显示电脑上的日期-英文版
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+	
+    \item (10 Point)\\
+    \begin{quote}
+        Ans:\\
+        \begin{center}
+            \begin{circuitikz}[american]
+                \draw (0,0) to[V=$120V$,invert] (0,3) %invert使得方向相反
+                to[R, R = $4\Omega$,-*] (2,3)
+                to[short, -*] (4,3) to [R,R=$3\Omega$](6,3)
+                to[R,R=$9\Omega$](6,0)
+                to[short, -*] (4,0)
+                to[short,-*] (2,0) --(0,0);
+                \draw (4,3) to[R= $18\Omega$] (4,0);
+                \draw [->,-latex, blue] (0.6,2.6) to (1.6,2.6);
+                \node at (1.1,2.2)[blue]{$i_s$};
+                \draw [->,-latex, blue] (3.6,2) to node [left, blue] {$i_1$} (3.6,1);
+                \draw [->,-latex, blue] (5.6,2) to node [left, blue] {$i_2$} (5.6,1);
+                \node at (2,3.3){x};
+                \node at (2,-0.3){y};
+            \end{circuitikz}
+        \end{center}
+        a).Since in the circuit the sum of the resistance is equivalent to
+        \begin{center}
+            $R =$4 + $(\frac{1}{18} + \frac{1}{12})$$^{-1}$ = $11.2 \Omega$
+        \end{center}
+    	\quad Thus using Ohm's law we compute the value of $i_s$ and $u_1$:
+    	\begin{center}
+    		i$_s$ = $\frac{120}{R}$  = $\frac{75}{7}$ A ; 
+    		\qquad
+    		$u_1$ = $(\frac{1}{18} + \frac{1}{12})$$^{-1}$ $\times$ $i_s$ = $\frac{540}{7}V$
+    	\end{center}
+    	\quad Then using Ohm's too:
+    	\begin{center}
+    		$i_1$ = $u_1$ / 18 = $\frac{30}{7}$A;
+    		\qquad 
+    		$i_2$ = $u_1$ / 12= $\frac{45}{7}$A
+    	\end{center}
+    	\quad Last, we can use P = i$^2$R compute the value of each resistor:
+    	\begin{center}
+    		P$_{18\Omega}$ = $\frac{16200}{49}$W; \qquad P$_{9\Omega}$ = $\frac{18225}{49}$W
+    		\\
+    		P$_{3\Omega}$ = $\frac{6075}{45}$W; \qquad P$_{4\Omega}$ = $\frac{22500}{49}$W
+    	\end{center}
+    	b).Given the current $i_s$, we can figure it out the power by the 120V source:
+    	\begin{center}
+    		P$_{120V}$ = 120$\times$$i_s$ = $\frac{9000}{7}$W
+    	\end{center}
+    	c).The power delivered equals the power dissipated is:
+    	\begin{center}
+    		P$_{diss}$ = $\frac{16200}{49}$ + $\frac{18225}{49}$ + $\frac{6075}{45}$ + $\frac{22500}{49}$ = $\frac{9000}{7}$W
+    	\end{center}
+    \end{quote}
+
+	\item(10 Point)
+		\begin{quote}
+			Ans:\\
+			\begin{center}
+				\begin{circuitikz}[american]
+					\draw (0,0) to[V=$900V$,invert] (0,3) %invert使得方向相反
+					to [R,l = $30\Omega$, -*] (2.5,3)to (2.5,4.5) 
+					to [R,l=$30\Omega$, -*] (5,4.5)
+					to [R,l=$182\Omega$](7.5,4.5) to [short,-*]  (7.5,3) to (8.5,3)%无元件画带点线用short
+					to [R,l=$17\Omega$, ] (8.5,0) to (0,0);
+					\draw (2.5,3) to(2.5,1.5)
+					to [R, l_=$10\Omega$, -*] (5,1.5)
+					to [R,l_=$44\Omega$,] (7.5,1.5) to  (7.5,3) ;
+					\draw (5,4.5) to[R,l=$60$] (5,1.5);
+					\draw [->, -latex, blue] (3.3,4) to (4.3,4);
+					\node at (3.8,3.6)[blue]{$i_1$};
+					\node at (4.6,4.2){$+$};
+					\node at (4.6,3){$v$};
+					\node at (4.6,1.8){$-$};
+					\draw [->, -latex, blue] (5.8,1.9) to (6.8,1.9);
+					\node at (6.3,2.2) [blue]{$i_2$};
+				\end{circuitikz}
+			\end{center}
+		
+			\quad Replace the 10-30-60	delta with a wye equivalent to get
+			\\
+			\begin{center}
+				\begin{circuitikz}[american]
+					\draw (0,0) to[V=$900V$,invert] (0,3) %invert使得方向相反
+					to [R,l = $30\Omega$, -*] (2,3)
+					to [R,l = $3\Omega$, -*] (3.5,3)
+					to [R,l=$18\Omega$] (5,4.5)
+					to [R,l=$182\Omega$](7.5,4.5) to [short,-*]  (7.5,3) to (8.5,3)%无元件画带点线用short
+					to [R,l=$17\Omega$, ] (8.5,0) to (0,0);
+					\draw (3.5,3) to [R, l_=$6\Omega$] (5,1.5)
+					to [R,l_=$44\Omega$,] (7.5,1.5) to  (7.5,3) ;
+					\node at (4.6,3.6){$+$};
+					\node at (4.6,3){$v$};
+					\node at (4.6,2.4){$-$};
+					\draw [->, -latex, blue] (5.8,1.9) to (6.8,1.9);
+					\node at (6.3,2.2) [blue]{$i_2$};
+				\end{circuitikz}
+			\end{center}
+		
+		\quad a). We know the total resistance by the equivalent resistance:
+		\begin{center}
+			$R$ = $30+3+17$ + ($\frac{1}{18+182}$ + $\frac{1}{6+44}$)$^{-1}$ = 90$\Omega$
+		\end{center}
+		\qquad Then we can figure out the total current i$_s$:
+		\begin{center}
+			i$_s$ = $\frac{900}{90}$ = 10A
+		\end{center}
+		\qquad Using Ohm's law and parallel shunt to calculate the current through the (18+182)$\Omega$ resistance i$_3$ and i$_2$:
+		\begin{center}
+			i$_2$ = 10 $\times$ $\frac{(6+44)||(18+182)}{6+44}$ = 8A;\quad i$_3$ = 10 $\times$ $\frac{(6+44)||(18+182)}{18+182}$ = 2A
+		\end{center}
+		\qquad Because the voltage across the i$_1$ current is equal to the sum  of the voltages of 3$\Omega$ and 18$\Omega$. Thus we can figure out i$_1$:
+		\begin{center}
+			i$_1$ = $\frac{3i_s + 18i_3}{30}$ = 2.2A
+		\end{center}
+		
+		\quad b).
+		\begin{center}
+			v = $18i_3 - 6i_2$ = -12V
+		\end{center}
+	
+		\quad c).
+		\begin{center}
+			i$_2$ = 8A;
+		\end{center}
+		
+		\quad d).
+		\begin{center}
+			P = $900i_s$ = 9000W
+		\end{center}
+		\end{quote}
+	
+	\item(15 Point)	
+		\begin{quote}
+			Ans:\\
+		\qquad From Eq 3.69 and Eq 3.50
+		\begin{center}
+				$\frac{i_1}{i_3} = \frac{R_2R_3}{D}$;\qquad $\frac{R_3}{R_1} = \frac{i_1^2}{i_3^2}$
+		\end{center}
+		 Thus:
+		\begin{center}
+			$R_3 = \frac{D^2}{R_1R_2^2}$
+		\end{center}
+		 Then we konwn :
+		\begin{center}
+			D = $(R_1 + 2R_a)(R_2 + 2R_b) + 2R_2R_b$;\\
+			$R_a = \sigma R_1$\qquad
+			$R_b = \frac{(1+2\sigma)^2\sigma R1}{4(1+\sigma)^2}$;\qquad
+			$R_2 = (1+2\sigma)^2R_1$ 
+		\end{center}
+		 So we can calculate D:\\
+		\begin{center}
+			D = $\frac{R_1^2(1+2\sigma)^4}{1+\sigma}$
+		\end{center}
+		 Solving for R$_3$ gives:
+			\begin{center}
+				$R_3 = \frac{D^2}{R_1R_2^2} = \frac{R_1(1+2\sigma)^4}{(1+\sigma)^2}$
+			\end{center}
+			
+		\end{quote}
+		
+		\item(15 Point)
+		\begin{quote}
+			\quad Ans:\\
+			\begin{center}
+				\begin{circuitikz}[american]
+				\draw (0,0) to [V, l=$18V$, invert] (0,3)
+				to [short, -*] (2,3)
+				to [R, l=$10\Omega$, -*] (4, 3)
+				to [cV, l=$3v_{\Delta}$, -*] (6,3)
+				to (8,3)
+				to [R, l=$40\Omega$] (8,0)
+				to (0,0);
+				
+				\draw (2,3) to [R, l=$33\Omega$, -*] (2,0);
+				\draw (4,3) to [R, l=$2\Omega$, -*] (4,0);
+				\draw (6,3) to [R, l=$20\Omega$, -*] (6,0);
+				
+				\node at (3.5,2.5) {$+$};
+				\node at (3.5,0.4) {$-$};
+				\node at (3.5,1.5) {$v_\Delta$};
+				
+				\node at (7.5,2.5) {$+$};
+				\node at (7.5,0.4) {$-$};
+				\node at (7.5,1.5) {$v_0$};
+				\end{circuitikz}
+			\end{center}
+			
+			\qquad Place 3v$_\Delta$ inside a supernode and use the lower node as a reference. Then:
+			\begin{center}
+				$\frac{v_\Delta - 18}{10} + \frac{v_\Delta}{2} + \frac{v_\Delta - 3v_\Delta}{20} + \frac{v_\Delta - 3v_\Delta}{40} =0 $
+			\end{center}
+			\begin{center}
+				$18v_\Delta = 72$ ; \qquad $v_\Delta = 4V$
+			\end{center}
+			Thus we can calculate v$_0$:
+			\begin{center}
+				$v_0 = v_\Delta - 3v_\Delta = -8V$
+			\end{center}	
+		\end{quote}
+	\item (20 Point)
+		\begin{quote}
+			\quad Ans:\\
+			\begin{center}
+				\begin{circuitikz}[american]
+					\draw (0,0) to [V, l=$225V$, invert, -*] (0,3)
+					to (0,5) to [R, l=$5\Omega$] (8,5) to (8,3)
+					to [cV, l=$10i_{\sigma}$] (8,0)
+					to[R=$1\Omega$, -*] (4,0)
+					to[R=$2\Omega$] (0,0);
+					
+					\draw (0,3) to [R=$3\Omega$, -*] (4,3)
+					to[R=$4\Omega$, -*] (8,3);
+					
+					\draw (4,3) to [R, l=$20\Omega$] (4,0);
+					 
+					\draw  (2.5, 2.6)[->, -latex, blue]  to (1.5,2.6);
+					\node at (2, 2.3) [blue] {$i\sigma$};
+					
+					\draw (2.8,1.3)  [<-]arc(0:270:0.8);    %!!! 这个画曲线箭头非常可
+					\node at (2.1,1.3) [blue ]{$i_1$};
+					
+					\draw (4.7,3.9)  [<-]arc(0:270:0.8);    %!!! 这个画曲线箭头非常可
+					\node at (4,3.9) [blue ]{$i_2$};
+					
+					\draw (6.8,1.3)  [<-]arc(0:270:0.8);    %!!! 这个画曲线箭头非常可
+					\node at (6.1,1.3) [blue ]{$i_3$};
+					
+					
+				\end{circuitikz}
+			\end{center}
+		    Through the mesh-current method we can get:
+			
+			\qquad	$-255 + 3(i_1-i_3) + 20(i_1-i_2) + 2i_1 = 0$ \qquad (mesh 1)
+			
+			
+			
+			\qquad	$5i_2+4(i_2-i_3)+3(i_2-i_1) = 0$	\qquad  (mesh 2)
+			
+			
+			\qquad $4(i_3-i_2)+10i_\sigma+i_3+20(i_3-i_1) = 0$ \qquad  (mesh 3)
+			
+		
+			
+			\qquad	$i_2-i_1=i_\sigma$
+
+		
+			 simplified as:
+
+			
+			\qquad	$25i_1 - 3i_2 -20i_3 + 0i_\sigma= 225$ \qquad (mesh 1)
+			
+			
+			\qquad	$-3i_1 + 12i_2-4i_3+0i_\sigma = 0$		\qquad (mesh 2)
+			
+			
+			\qquad	$-20i_1-4i_2+25i_3+10i_\sigma = 0$		\qquad (mesh 3)
+			
+			
+			\qquad	$i_1 - i_2 + 0\times i_3 +i_\sigma = 0$\\
+		    Solving:
+		    \begin{center}
+		    	$i_1 = 108A$ \quad $i_2 = 65A$ \quad $i_3 = 114A$ \quad $i_\sigma = -43A$
+		    \end{center}
+		
+			Thus the power dissipate in the 20$\Omega$ resistor in the circuit is:
+			\begin{center}
+				$P_{20\Omega}$ = $(i_3 - i_1)^2 \times 20 = 720W$
+			\end{center}
+			And the power extracted by the current con-trolled voltage source is:
+			\begin{center}
+				$P_{10i_\sigma} = 10i_\sigma i_3 = -49020W$
+			\end{center}
+			\end{quote}
+	\item (10 Points)
+		\begin{quote}
+			\quad Ans:\\
+			\begin{center}
+				\begin{circuitikz}[american]
+					\draw (0,0) to [I, l=$160A$] (0,3)
+					to (0,5) to [R, l=$1\Omega$, f=$i_\Delta$] (8, 5)
+					to [short, -*] (8,3)
+					to [cV, l = 8$i_\Delta$] (8,0) to (0,0);
+					
+					\draw (0,3) to [R, l=$5\Omega$, *-*] (4,3)
+					to [R, l=$4\Omega$, -*] (8,3);
+					
+					\draw (4,3) to [R, l=$20\Omega$, -*] (4,0);
+					
+					\draw (2.8,1.5)  [<-]arc(0:270:0.8);    %!!! 这个画曲线箭头非常可
+					\node at (2,1.5) [blue ]{$i_1$};
+					
+					\draw (4.8,3.9)  [<-]arc(0:270:0.8);    %!!! 这个画曲线箭头非常可
+					\node at (4,4) [blue ]{$i_2$};
+					
+					\draw (6.8,1.5)  [<-]arc(0:270:0.8);    %!!! 这个画曲线箭头非常可
+					\node at (6,1.5) [blue ]{$i_3$};					
+				\end{circuitikz}
+			\end{center}
+		
+		
+		Through the mesh-current method and {$i_1 = 160A , i_2 = i_\Delta$} we can get:
+		
+		\begin{center}
+			$4(i_3 - i_\Delta) + 8i_\Delta + 20(i_3 - 160) = 0$
+		
+		
+			$i_\Delta + 4(i_\Delta - i_3) + 5(i_\Delta - 160) = 0$\\	
+		\end{center}
+		
+		simplified as:
+		\begin{center}
+			$24i_3 + 4i_\Delta = 3200$
+			
+			
+			$10i_\Delta-4i_3 = 800$\\
+		\end{center}
+		
+		Solving:
+		\begin{center}
+			$i_\Delta = 125A$; \qquad $i_3 = 112.5A$
+		\end{center}
+
+		\quad According to the relationship between node voltages:
+		\begin{center}
+			$v_{160A} = 8i_\Delta + i_\Delta = 1125V$
+		\end{center}
+		Then :\\
+		\begin{center}
+			$P_{160A} = -160v_{160A} = -180000W$ ; \qquad $P_{8i_\Delta} = 8i_\Delta i_3 = 112500W$
+		\end{center}
+		\quad Therefore, the independent source is developing 180000 W, all other elements are absorbing power, and the total power developed is thus 180000W.\\
+		Let's Check it :
+		\begin{center}
+			$P_{1\Omega} = i_\Delta^2 \times 1 = 15625W$; \qquad $P_{5\Omega} = (i_1 - i_\Delta)^2 \times 5 = 6125W$\\
+			$P_{4\Omega} = (i_\Delta - i_3)^2 \times 4 = 625W$; \qquad $P_{20\Omega} = (i_1 - i_3)^2 \times 20= 45125W$
+		\end{center}
+		\begin{center}
+			$\Sigma_{P} = 112500 + 15625+6125+625+45125 = 180000W$ (CHECKS)
+		\end{center}
+		\end{quote}
+	\item (10 Points)
+	\begin{quote}
+		\quad Ans:\\
+		\begin{center}
+			\begin{circuitikz}[american]
+				\draw (0,0) to [V, l=$240V$,\begin{center}
+					\begin{circuitikz}[american]
+						\draw (0,0) to [V, l=$60V$,-*,invert] (0,3) 
+						to [R, l=$10\Omega$] (3,3) 
+						to [R, l= $8\Omega$,*-*] (6,3)
+						to [short,-*] (8,3);
+						\draw (3,3) to[R, l=$40\Omega$, *-*] (3,0);
+						\draw(0,0) to[short,-*] (8,0);
+						\draw (0,3) to (0,5)
+						to [I, l= $6A$] (6,5)
+						to (6,3);
+						\node at (8,3.2)[blue] {a};
+						\node at (8,-0.3)[blue] {b};
+					\end{circuitikz}
+				\end{center}invert] (0,3)
+				to [R, l = $12\Omega$, -*] (4,3)
+				to [R, l=$15\Omega$, -*] (8,3)
+				to (12,3) to [dcisource, l= $i_{dc}$] (12,0)
+				to[short, -*] (8,0)
+				to [R, l=$40\Omega$, -*] (4,0) to(0,0);
+				
+				\draw (4,3) to[R, l=$20\Omega$] (4,0);
+				\draw (8,3) to[R, l=$50\Omega$] (8,0);
+				
+				\draw (4,3) to (4,5) to[I, l=$10A$ , invert] (8,5) to(8,3);	
+				
+				\node at (3.8, 3.2) [blue] {1};
+				\node at (8.6, 3.2) [blue] {v= 0};
+				\node at (3.8, 0.2) [blue] {2};
+				\node at (8.2, 0.2) [blue] {3};
+			\end{circuitikz}
+		\end{center}
+		Since the 10 A sourve is developing 0 W, v$_1$ must be 0 V.\\
+		Since V$_1$ is known, we can sum the currents away from node 1 to find $v_2$; Thus:
+		\begin{center}
+			$\frac{0-(240+v_2)}{12} + \frac{0-v_2}{20} + \frac{0}{15} - 10 = 0$
+			\qquad$\therefore v_2 = -225V $
+		\end{center}
+		Now that we know $v_2$ we sum the current away form node to find $v_3$;\\ Thus:
+		\begin{center}
+			$\frac{v_2+240-0}{12} + \frac{v_2-0}{20} + \frac{v_2-v_3}{40} = 0 $
+			\qquad$\therefore v_3 = -625V $
+		\end{center}
+		Now that we know $v_3 we sum the currents away from node 3 to find i_{dc} ;$\\ Thus:
+		\begin{center}
+			$\frac{v_3}{50} + \frac{v_3 - v_2}{40} - i_{dc} = 0$ \qquad $\therefore i_{dc} = -22.5A$
+		\end{center}
+	\end{quote}
+
+	\item(10 Points)
+	\begin{quote}
+		\quad Ans:\\
+		\qquad [a] Apply source transformations to both current sources to get:
+		\begin{center}
+			\begin{circuitikz}[american]
+				\draw (0,0) to[V, l=$5.4V$, invert] (0,2)
+				to [R,l=$2.7k\Omega$, -*] (3,2) 
+				to [R, l=$2.3k\Omega$, -*] (6,2)
+				to[R, l=$1k\Omega$] (9,2)
+				to [V, l=$1.2V$, invert] (9,0) to (0,0);
+				
+				\draw (5,1.6) [->, -latex, blue] to (4,1.6);
+				\node at (4.5, 1.3) [blue]{$i_0$};
+			\end{circuitikz}
+		\end{center}
+		\begin{center}
+			$i_0 = \frac{-(5.4+1.2)}{2700+2300+1000}= -1.1mA$
+		\end{center}
+		\qquad [b]
+			\begin{center}
+				\begin{circuitikz}[american]
+					\draw (0,0) to[I, l=$2mA$] (0,2)
+					to  (3,2) 
+					to [R, l=$2.3k\Omega$, *-*] (6,2)
+					to (9,2)
+					to [I, l=$1.2mA$] (9,0) to (0,0);
+					
+					\draw (5,1.6) [->, -latex, blue] to (4,1.6);
+					\node at (4.5, 1.3) [blue]{$i_0$};
+					
+					\draw (3,2) to [R,l=$2.7k\Omega$, -*] (3,0);
+					\draw (6,2) to [R, l=$1k\Omega$,-*] (6,0);
+					
+					\draw (3,0) to[short] node [ground] {GND}(3,-1);
+					
+					\node at (2.8,2.2){$v_1$};
+					\node at (6.2, 2.2) {$v_2$};
+				\end{circuitikz}
+			\end{center}
+		\qquad The node voltage equations:
+		\begin{center}
+			$-2 \times 10^{-3} + \frac{v_1}{2700} + \frac{v_1-v_2}{2300} = 0$
+		\end{center}
+		\begin{center}
+			$\frac{v_2}{1000} + \frac{v_2 - v_1}{2300} + 1.2 \times 10^{-3} = 0$
+		\end{center}
+		\qquad simplified as:
+		\begin{center}
+			$50v_1 - 27v_2 = 124.2$
+		\end{center}
+		\begin{center}
+			$-10v_1 + 33v_2 = -27.6$
+		\end{center}
+		\qquad Solving:
+		\begin{center}
+			$v_1 = 2.43V$ \qquad $v_2 = -0.1V$
+		\end{center}
+	\begin{center}
+		$\therefore i_0 = \frac{v_2 - v_1}{2300}= -1.1mA$ 
+	\end{center}
+		
+	\end{quote}
+
+
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+\end{document}
